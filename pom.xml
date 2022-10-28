@@ -55,7 +55,7 @@
 		</dependency>
 
 	</dependencies>
-
+<!-- lookup parent from repository -->
 	<build>
 		<plugins>
 		<plugin>
