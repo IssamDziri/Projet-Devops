@@ -29,7 +29,6 @@ import tn.esprit.rh.achat.services.ProduitServiceImpl;
 	
 
 	@Test
-	
 	void testAddProduit()  throws ParseException{
 		List<Produit> produits = produitService.retrieveAllProduits();
 		Produit produitADD = Produit.builder().codeProduit("2000").libelleProduit("lait").build();
