@@ -6,7 +6,7 @@ services:
     image: mysql/mysql-server:8.0
     restart: unless-stopped
     ports:
-     - 3306:3306
+     - 3307:3307
     environment:
      - MYSQL_ROOT_PASSWORD=pass
      - MYSQL_DATABASE=achatdb
