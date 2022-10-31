@@ -15,7 +15,7 @@ services:
 
 
   spring_app:
-    image: issamdziri97/achat
+    image: issamdziri1997/achat
     container_name: achatspring
     restart: on-failure
     environment:
