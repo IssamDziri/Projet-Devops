@@ -8,10 +8,10 @@ services:
     ports:
      - 3306:336
     environment:
-     - MYSQL_ROOT_PASSWORD=pass
+     - MYSQL_ROOT_PASSWORD=
      - MYSQL_DATABASE=achatdb
      - MYSQL_USER=root
-     - MYSQL_PASSWORD=pass
+     - MYSQL_PASSWORD=
 
 
   spring_app:
