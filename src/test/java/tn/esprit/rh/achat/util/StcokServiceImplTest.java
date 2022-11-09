@@ -1,4 +1,4 @@
-package tn.esprit.rh.achat.util;
+/*package tn.esprit.rh.achat.util;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,3 +50,4 @@ import tn.esprit.rh.achat.services.StockServiceImpl;
 	}
 	 
 }
+*/
