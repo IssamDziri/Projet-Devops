@@ -33,13 +33,13 @@ public class CategorieProduitServiceImpl implements ICategorieProduitService {
 
 	@Override
 	public CategorieProduit updateCategorieProduit(CategorieProduit cp) {
-		categorieProduitRepository.saveAndFlush(cp);
+		categorieProduitRepository.save(cp);
 		return cp;
 	}
 
 	@Override
-	public CategorieProduit retrieveCategorieProduit(Long id, CategorieProduit categorieProduit) {
-		 categorieProduitRepository.findById(id).orElse(null);
+	public CategorieProduit retrieveCategorieProduit(Long id) {
+		CategorieProduit categorieProduit = categorieProduitRepository.findById(id).orElse(null);
 		return categorieProduit;
 	}
 

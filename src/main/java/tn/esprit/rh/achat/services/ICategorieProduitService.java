@@ -15,6 +15,6 @@ public interface ICategorieProduitService {
 
 	CategorieProduit updateCategorieProduit(CategorieProduit cp);
 
-	CategorieProduit retrieveCategorieProduit(Long id, CategorieProduit categorieProduit);
+	CategorieProduit retrieveCategorieProduit(Long id);
 
 }
