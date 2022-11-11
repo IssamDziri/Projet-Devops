@@ -34,23 +34,24 @@ pipeline {
                 sh 'mvn install package'
             }
          }
-      //  stage ('SONAR'){
-         //   steps {
+        stage ('SONAR'){
+            steps {
         //
-            //      sh "mvn sonar:sonar \
-              //          -Dsonar.projectKey=devops \
-                //        -Dsonar.host.url=http://192.168.1.29:9000 \
-                  //      -Dsonar.login=01fc7fe679be32f2849631e11b9ddd91e741918a"
+                  sh "mvn sonar:sonar \
+                        -Dsonar.projectKey=devops \
+                        -Dsonar.host.url=http://192.168.1.29:9000 \
+                        -Dsonar.login=01fc7fe679be32f2849631e11b9ddd91e741918a"
 
-                 //}
+                 }
     
-                   //  }
+                     }
                      
-        //stage('NEXUS') {
-      //steps {
-        //sh 'mvn deploy -DskipTests'
-      //}
-    //}
+        stage('NEXUS') {
+     
+             steps {
+             sh 'mvn deploy -DskipTests'
+                    }
+                       }
     
     
        stage('Docker Build') {
