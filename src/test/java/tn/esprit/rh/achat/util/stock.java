@@ -18,63 +18,79 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@SpringBootTest
+@SpringBootTest(classes = AchatApplication.class)
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @ExtendWith(MockitoExtension.class)
- class stock {
-    @Mock
-    StockRepository Repo;
 
-    @InjectMocks
-    StockServiceImpl Service;
+public class OperateurServiceMockitoTest {
+	
+ @Mock
+ OperateurRepository operateurRepositoryMock;
+ @InjectMocks
+ OperateurServiceImpl operateurService;
 
-    Stock stock= Stock.builder().libelleStock("stock").qte(100).qteMin(10).build();
-    List<Stock> listStocks = new ArrayList<Stock>() {
-        {
-            add(Stock.builder().libelleStock("first").qte(10).qteMin(5).build());
-            add(Stock.builder().libelleStock("second").qte(200).qteMin(10).build());
-        }
-    };
 
-    @Test
-     void testRetrieveStock() {
-        Mockito.when(Repo.findById(Mockito.anyLong())).thenReturn(Optional.of(stock));
-        @SuppressWarnings("removal")
-		Stock s1 = Service.retrieveStock(new Long(2));
-        Assertions.assertNotNull(s1);
-    }
+ Operateur op = Operateur.builder().nom("Farhat").prenom("Chaima").password("root").build();
+ List<Operateur> listOperateurs = new ArrayList<Operateur>(){
+     {
+         add(Operateur.builder().nom("amine").prenom("amine").password("root").build());
+         add(Operateur.builder().nom("sabrine").prenom("sabrine").password("root").build());
+         add(Operateur.builder().nom("issam").prenom("issam").password("root").build());
+         add(Operateur.builder().nom("iheb").prenom("iheb").password("root").build());
 
-    @Test
-     void testAllRetrieveStock() {
-        Mockito.when(Repo.findAll()).thenReturn(listStocks);
-        List<Stock> lStocks = Service.retrieveAllStocks();
-        Assertions.assertNotNull(lStocks);
-    }
+     }
 
-    @Test
-     void testAddstock() {
-        Mockito.when(Repo.save(stock)).thenReturn(stock);
-        Stock s1 = Service.addStock(stock);
-        Assertions.assertNotNull(s1);
+ };
 
-    }
-    @Test
-     void testUpdatestock() {
-    	stock.setQteMin(5);
-        Mockito.when(Repo.save(stock)).thenReturn(stock);
-        Stock s1 = Service.updateStock(stock);
-        Assertions.assertEquals(stock,s1);
+ @Test
+ public void testretrieveOperateur(){
+     Mockito.when(operateurRepositoryMock.findById(Mockito.anyLong())).thenReturn(Optional.of(op)); //find all
+     Operateur op1 = operateurService.retrieveOperateur(2L);
+     Assertions.assertNotNull(op1);
+		System.out.println("woorking retrieve !");
 
-    }
 
-    @Test
-     void testDeletestock() {
-    	Service.deleteStock(stock.getIdStock());
-        Mockito.verify(Repo, Mockito.times(1)).deleteById(stock.getIdStock());
-    }
- 
-    
+ }
+ @Test
+ public void testaddOperateur() {
+     Mockito.when(operateurRepositoryMock.save(op)).thenReturn(op);
+     Operateur op1 = operateurService.addOperateur(op);
+     Assertions.assertNotNull(op1);
+		System.out.println("woorking add !");
 
-    
-    
-    
+
+ }
+
+ @Test
+ public void testretrieveAllOperateurs() {
+     Mockito.when(operateurRepositoryMock.findAll()).thenReturn(listOperateurs);
+     List<Operateur> listOp = operateurService.retrieveAllOperateurs();
+     Assertions.assertNotNull(listOp);
+		System.out.println("woorkiiiiing all retrieve !");
+
+ }
+
+
+
+ @Test
+ public void tesupdateOperateur() {
+     op.setPrenom("ines");
+     Mockito.when(operateurRepositoryMock.save(op)).thenReturn(op);
+     Operateur op1 = operateurService.updateOperateur(op);
+     Assertions.assertEquals(op.getPrenom(),op1.getPrenom());
+		System.out.println("woorking update !");
+
+
+ }
+
+ @Test
+ public void testdeleteOperateur() {
+     Operateur op2 = Operateur.builder().nom("iheb").prenom("iheb").password("root").build();
+     operateurService.deleteOperateur(op2.getIdOperateur());
+     Mockito.verify(operateurRepositoryMock).deleteById(op2.getIdOperateur());
+		System.out.println("woorking delete !");
+
+
+ }
+
 }
