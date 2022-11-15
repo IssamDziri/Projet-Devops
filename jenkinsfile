@@ -20,6 +20,13 @@ pipeline {
         sh "mvn compiler:compile"
       }
     }
+	stage("Mvn test") {
+      
+      steps {
+        echo 'testing the application ...'
+        sh "mvn test -e"
+      }
+    }
 	stage("MVN SONARQUBE"){
    steps{
    sh "mvn sonar:sonar \
