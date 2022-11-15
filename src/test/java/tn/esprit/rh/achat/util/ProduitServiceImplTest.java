@@ -1,4 +1,4 @@
-package tn.esprit.rh.achat;
+package tn.esprit.rh.achat.util;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +32,7 @@ import tn.esprit.rh.achat.services.ProduitServiceImpl;
 	
 	void testAddProduit()  throws ParseException{
 		List<Produit> produits = produitService.retrieveAllProduits();
-		Produit produitADD = Produit.builder().codeProduit("2000").libelleProduit("lait").build();
+		Produit produitADD = Produit.builder().codeProduit("100").libelleProduit("lait").build();
 		int expected = produits.size();
 		Produit savedProduit = produitService.addProduit(produitADD);
 		assertEquals(expected + 1, produitService.retrieveAllProduits().size());		
