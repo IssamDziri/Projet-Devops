@@ -23,8 +23,7 @@ pipeline {
 	stage("Mvn test") {
       
       steps {
-        echo 'testing the application ...'
-        sh "mvn test -e"
+        sh "mvn test"
       }
     }
 	stage("MVN SONARQUBE"){
