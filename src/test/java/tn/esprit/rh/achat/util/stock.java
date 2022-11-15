@@ -1,4 +1,4 @@
-package tn.esprit.rh.achat.util;
+/*package tn.esprit.rh.achat.util;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -69,11 +69,6 @@ import java.util.Optional;
      void testDeletestock() {
     	Service.deleteStock(stock.getIdStock());
         Mockito.verify(Repo, Mockito.times(1)).deleteById(stock.getIdStock());
-    }
- 
-    
-
-    
-    
-    
+    }   
 }
+*/
