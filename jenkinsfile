@@ -33,7 +33,7 @@ pipeline {
         }
         stage('MVN TEST') {
             steps {
-               sh 'mvn test -e'
+               sh 'mvn test'
             
            }
         }
