@@ -1,33 +1,77 @@
 pipeline {
-  agent any 
-  tools {
-    maven 'M2_Home'
-    jdk 'JAVA-HOME'
-  }
-  stages {
- 
-    stage("Mvn clean") {
-      
-      steps {
-        echo 'cleaning the application ...'
-        sh "mvn clean"
-      }
+    agent any
+    environment{
+        PATH = "$PATH:/usr/share/maven/bin"
     }
-    stage("Mvn compile") {
-      
-      steps {
-        echo 'compiling the application ...'
-        sh "mvn compiler:compile"
-      }
-    }
-      stage("test statique sonar") {
-      
-        steps { sh "mvn sonar:sonar \
-           -Dsonar.projectKey=Issam \
-           -Dsonar.host.url=http://192.168.1.16:9000 \
-            -Dsonar.login=fd5cab5f77ad3fa468feda76eca29976331132b9"
+
+    stages {
+        stage('GIT') {
+          
+         steps {
+                echo 'cloning project from GIT'
+                git branch : "chaima" , 
+                url :'https://github.com/IssamDziri/Projet-Devops.git'
+            }
+        }
+    stage('MVN CLEAN') {
+            steps {
+               sh 'mvn clean'
+            }
+        }
+    stage("Build") {
+            steps {
+              sh "mvn clean package -DskipTests"
+    
+            }
+        }
+          stage('Test') {
+            steps {
+               sh 'mvn test'
+            }
+        }
+        stage('MVN COMPILE') {
+            steps {
+               sh 'mvn compile'
+            
+           }
+        }
+        stage ('scan'){
+            steps {
+        
+    sh "mvn sonar:sonar \
+  -Dsonar.projectKey=Devops \
+  -Dsonar.host.url=http://192.168.1.13:9000 \
+  -Dsonar.login=b5c9f151c92123ef33dda6e2bbd2ad80e086e73a"
 
     }
         }
-            }
+        stage('Nexus') {
+      steps {
+        sh 'mvn deploy -DskipTests'
+      }
+    }
+    stage("Building Docker Image") {
+                steps{
+                    sh 'docker build -t chaima1127/achat .'
+                }
+        }
+        stage("Login to DockerHub") {
+                steps{
+
+                    sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u chaima1127 -p 181JFt0819'
+                }
+        }
+        stage("Push to DockerHub") {
+                steps{
+                    sh 'docker push chaima1127/achat'
+                }
+        }
+        stage("Docker-compose") {
+                steps{
+                    sh 'docker-compose up -d'
+                }
+        }
+        
+        
+}
 }
