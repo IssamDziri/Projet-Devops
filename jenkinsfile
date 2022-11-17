@@ -26,7 +26,7 @@ pipeline {
         }
           stage('Test') {
             steps {
-               sh 'mvn test'
+               sh 'mvn test''-Dtest=com.esprit.examen.services.OperateurServiceMockitoTest.java'
             }
         }
         stage('MVN COMPILE') {
