@@ -24,14 +24,16 @@ pipeline {
     
             }
         }
-          stage('Test') {
-            steps {
-               sh "mvn test '-Dtest=tn.esprit.rh.achat.util.OperateurServiceMockitoTest.java'"
-            }
-        }
+       
         stage('MVN COMPILE') {
             steps {
                sh 'mvn compile'
+            
+           }
+        }
+        stage('MVN TEST') {
+            steps {
+               sh 'mvn test -e'
             
            }
         }
