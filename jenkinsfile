@@ -20,6 +20,14 @@ pipeline {
         sh "mvn compiler:compile"
       }
     }
+
+	stage("Mvn build") {
+      
+      steps {
+        sh "mvn test"
+      }
+    }
+
 	stage("Mvn test") {
       
       steps {
@@ -64,4 +72,19 @@ stage("Building Docker Image") {
                 }
         }
  }
+post {
+        success {
+             mail to: "ihebsaadaoui2@gmail.com",
+                    subject: "Build sucess",
+                    body: "sucess"
+            echo 'successful'
+        }
+        failure {
+             mail to: "ihebsaadaoui2@gmail.com",
+                    subject: "Build failed",
+                    body: "failed"
+            echo 'failed'
+        }
+      }
+
 }
