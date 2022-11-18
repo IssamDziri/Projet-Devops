@@ -58,7 +58,7 @@ public class SecteurServiceMockitoTest {
 	     Mockito.when(saRepositoryMock.findById(Mockito.anyLong())).thenReturn(Optional.of(sa)); //find all
 	     SecteurActivite sa1 = saService.retrieveSecteurActivite(2L);
 	     Assertions.assertNotNull(sa1);
-			System.out.println("woooorkiiiiing retrieve !");
+			System.out.println("Retrieve test passed with success!");
 
 
 	 }

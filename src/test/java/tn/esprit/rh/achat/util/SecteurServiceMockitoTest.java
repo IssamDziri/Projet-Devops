@@ -55,7 +55,7 @@ public class SecteurServiceMockitoTest {
 	     Mockito.when(saRepositoryMock.findById(Mockito.anyLong())).thenReturn(Optional.of(sa)); //find all
 	     SecteurActivite sa1 = saService.retrieveSecteurActivite(2L);
 	     Assertions.assertNotNull(sa1);
-			System.out.println("woooorkiiiiing retrieve !");
+			System.out.println("Retrieve test passed with success!");
 
 
 	 }
@@ -64,7 +64,7 @@ public class SecteurServiceMockitoTest {
 	     Mockito.when(saRepositoryMock.save(sa)).thenReturn(sa);
 	     SecteurActivite sa1 = saService.addSecteurActivite(sa);
 	     Assertions.assertNotNull(sa1);
-			System.out.println("woooorkiiiiing add !");
+			System.out.println("Add test passed with success!");
 
 
 	 }
@@ -74,7 +74,7 @@ public class SecteurServiceMockitoTest {
 	     Mockito.when(saRepositoryMock.findAll()).thenReturn(listSecteurs);
 	     List<SecteurActivite> listSa = saService.retrieveAllSecteurActivite();
 	     Assertions.assertNotNull(listSa);
-			System.out.println("woooorkiiiiing all retrieve !");
+			System.out.println("Retrieve all test passed with success! !");
 
 	 }
 
@@ -86,7 +86,7 @@ public class SecteurServiceMockitoTest {
 	     Mockito.when(saRepositoryMock.save(sa)).thenReturn(sa);
 	     SecteurActivite sa1 = saService.updateSecteurActivite(sa);
 	     Assertions.assertEquals(sa1.getCodeSecteurActivite(),sa1.getCodeSecteurActivite());
-			System.out.println("woooorkiiiiing update !");
+			System.out.println("Update test passed with success! !");
 
 
 	 }
@@ -96,7 +96,7 @@ public class SecteurServiceMockitoTest {
 		 SecteurActivite sa2 = SecteurActivite.builder().codeSecteurActivite("code12secteur").libelleSecteurActivite("sect12").build();
 		 saService.deleteSecteurActivite(sa2.getIdSecteurActivite());
 	     Mockito.verify(saRepositoryMock).deleteById(sa2.getIdSecteurActivite());
-			System.out.println("woooorkiiiiing delete !");
+			System.out.println("Delete test passed with success");
 
 
 	 }
