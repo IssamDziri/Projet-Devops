@@ -16,6 +16,13 @@
 	<properties>
 		<java.version>1.8</java.version>
 		<maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
+		<!-- JaCoCo Properties -->
+	    <jacoco.version>0.8.7</jacoco.version>
+	    <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
+	    <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
+	    <sonar.jacoco.reportPath>${project.basedir}/../target/jacoco.exec</sonar.jacoco.reportPath>
+	    <sonar.language>java</sonar.language>
+		
 	</properties>
 	<dependencies>
 		<dependency>
@@ -65,6 +72,12 @@
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.jacoco</groupId> 
+		    <artifactId>jacoco-maven-plugin</artifactId>
+		    <version>0.8.7</version>
 		</dependency>
 	</dependencies>
 <!-- lookup parent from repository -->
