@@ -40,12 +40,6 @@ public class ProduitServiceJunitTest {
         Assertions.assertEquals(listProduits.size(), listProduits.size());
     }
 
-   /* @Order(3)
-    @Test
-    public void testRetrieveUser() {
-        Produit produitRetrieved = produitService.retrieveProduit(1L);
-        Assertions.assertEquals(1L, produitRetrieved.getIdProduit().longValue());
-    }*/
 
     @Test
 
