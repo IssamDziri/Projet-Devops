@@ -1,4 +1,4 @@
-/*package tn.esprit.rh.achat.util;
+package tn.esprit.rh.achat.util;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -103,4 +103,4 @@ public class ProduitSericeTestMock {
         Mockito.verify(produitRepository, times(1)).save(Mockito.any(Produit.class));
 
         System.out.println("6");    }
-}*/
+}
