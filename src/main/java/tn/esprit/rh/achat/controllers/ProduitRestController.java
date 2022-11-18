@@ -4,13 +4,12 @@ import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.rh.achat.entities.Produit;
+import tn.esprit.rh.achat.dto.DtoProduit;
 import tn.esprit.rh.achat.services.IProduitService;
-
 import java.util.List;
 
 
 @RestController
-@CrossOrigin("*")
 @Api(tags = "Gestion des produits")
 @RequestMapping("/produit")
 public class ProduitRestController {
@@ -22,8 +21,7 @@ public class ProduitRestController {
 	@GetMapping("/retrieve-all-produits")
 	@ResponseBody
 	public List<Produit> getProduits() {
-		List<Produit> list = produitService.retrieveAllProduits();
-		return list;
+		return produitService.retrieveAllProduits();
 	}
 
 	// http://localhost:8089/SpringMVC/produit/retrieve-produit/8
@@ -33,13 +31,14 @@ public class ProduitRestController {
 		return produitService.retrieveProduit(produitId);
 	}
 
+
 	/* Ajouter en produit tout en lui affectant la catégorie produit et le stock associés */
 	// http://localhost:8089/SpringMVC/produit/add-produit/{idCategorieProduit}/{idStock}
 	@PostMapping("/add-produit")
 	@ResponseBody
-	public Produit addProduit(@RequestBody Produit p) {
-		Produit produit = produitService.addProduit(p);
-		return produit;
+	public Produit addProduit(@RequestBody DtoProduit p) {
+		Produit produit = new Produit(p.getCodeProduit(),p.getLibelleProduit(),p.getPrix(),p.getDateCreation(),p.getDateDerniereModification());
+				return produitService.addProduit(produit);
 	}
 
 	// http://localhost:8089/SpringMVC/produit/remove-produit/{produit-id}
@@ -52,8 +51,9 @@ public class ProduitRestController {
 	// http://localhost:8089/SpringMVC/produit/modify-produit/{idCategorieProduit}/{idStock}
 	@PutMapping("/modify-produit")
 	@ResponseBody
-	public Produit modifyProduit(@RequestBody Produit p) {
-		return produitService.updateProduit(p);
+	public Produit modifyProduit(@RequestBody DtoProduit p) {
+		Produit produit = new Produit(p.getCodeProduit(),p.getLibelleProduit(),p.getPrix(),p.getDateCreation(),p.getDateDerniereModification());
+		return produitService.updateProduit(produit);
 	}
 
 	/*

@@ -46,15 +46,14 @@ public class FournisseurServiceImpl implements IFournisseurService {
 		return f;
 	}
 	
-	private DetailFournisseur  saveDetailFournisseur(Fournisseur f){
+	public DetailFournisseur  saveDetailFournisseur(Fournisseur f){
 		DetailFournisseur df = f.getDetailFournisseur();
 		detailFournisseurRepository.save(df);
 		return df;
 	}
-
+	
+	@Override
 	public Fournisseur updateFournisseur(Fournisseur f) {
-		DetailFournisseur df = saveDetailFournisseur(f);
-		f.setDetailFournisseur(df);	
 		fournisseurRepository.save(f);
 		return f;
 	}
@@ -68,16 +67,20 @@ public class FournisseurServiceImpl implements IFournisseurService {
 	@Override
 	public Fournisseur retrieveFournisseur(Long fournisseurId) {
 
-		Fournisseur fournisseur = fournisseurRepository.findById(fournisseurId).orElse(null);
-		return fournisseur;
+		return fournisseurRepository.findById(fournisseurId).orElse(null);
 	}
 
+	
 	@Override
 	public void assignSecteurActiviteToFournisseur(Long idSecteurActivite, Long idFournisseur) {
 		Fournisseur fournisseur = fournisseurRepository.findById(idFournisseur).orElse(null);
 		SecteurActivite secteurActivite = secteurActiviteRepository.findById(idSecteurActivite).orElse(null);
-        fournisseur.getSecteurActivites().add(secteurActivite);
-        fournisseurRepository.save(fournisseur);
+		if(fournisseur != null) {
+
+			fournisseur.getSecteurActivites().add(secteurActivite);
+
+			fournisseurRepository.save(fournisseur);
+		}
 		
 		
 	}

@@ -3,6 +3,7 @@ package tn.esprit.rh.achat.controllers;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import tn.esprit.rh.achat.dto.DtoSecteurActivite;
 import tn.esprit.rh.achat.entities.SecteurActivite;
 import tn.esprit.rh.achat.services.ISecteurActiviteService;
 
@@ -11,7 +12,6 @@ import java.util.List;
 @RestController
 @Api(tags = "Gestion des secteurs activites")
 @RequestMapping("/secteurActivite")
-@CrossOrigin("*")
 public class SecteurActiviteController {
 
 	@Autowired
@@ -21,8 +21,7 @@ public class SecteurActiviteController {
 	@GetMapping("/retrieve-all-secteurActivite")
 	@ResponseBody
 	public List<SecteurActivite> getSecteurActivite() {
-		List<SecteurActivite> list = secteurActiviteService.retrieveAllSecteurActivite();
-		return list;
+		return secteurActiviteService.retrieveAllSecteurActivite();
 	}
 
 	// http://localhost:8089/SpringMVC/secteurActivite/retrieve-secteurActivite/8
@@ -35,9 +34,9 @@ public class SecteurActiviteController {
 	// http://localhost:8089/SpringMVC/secteurActivite/add-secteurActivite
 	@PostMapping("/add-secteurActivite")
 	@ResponseBody
-	public SecteurActivite addSecteurActivite(@RequestBody SecteurActivite sa) {
-		SecteurActivite secteurActivite = secteurActiviteService.addSecteurActivite(sa);
-		return secteurActivite;
+	public SecteurActivite addSecteurActivite(@RequestBody DtoSecteurActivite sa) {
+		SecteurActivite secteur = new SecteurActivite(sa.getCodeSecteurActivite(),sa.getLibelleSecteurActivite());
+		return secteurActiviteService.addSecteurActivite(secteur);
 	}
 
 	// http://localhost:8089/SpringMVC/secteurActivite/remove-secteurActivite/{secteurActivite-id}
@@ -50,8 +49,11 @@ public class SecteurActiviteController {
 	// http://localhost:8089/SpringMVC/secteurActivite/modify-secteurActivite
 	@PutMapping("/modify-secteurActivite")
 	@ResponseBody
-	public SecteurActivite modifySecteurActivite(@RequestBody SecteurActivite secteurActivite) {
-		return secteurActiviteService.updateSecteurActivite(secteurActivite);
+
+	public SecteurActivite modifySecteurActivite(@RequestBody DtoSecteurActivite secteurActivite) {
+		SecteurActivite secteur = new SecteurActivite(secteurActivite.getCodeSecteurActivite(),secteurActivite.getLibelleSecteurActivite());
+		return secteurActiviteService.updateSecteurActivite(secteur);
+
 	}
 
 	
