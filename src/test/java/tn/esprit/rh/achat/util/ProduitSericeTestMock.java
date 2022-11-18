@@ -55,7 +55,7 @@ public class ProduitSericeTestMock {
         }
     };
     @Test
-    public void testretrieveAllProduits() {
+    private void testretrieveAllProduits() {
         Mockito.when(produitRepository.findAll()).thenReturn(listProduits);
         List<Produit> listproduit3 = produitService.retrieveAllProduits();
         assertEquals(3, listproduit3.size());
@@ -63,7 +63,7 @@ public class ProduitSericeTestMock {
         System.out.println("2555");
     }
     @Test
-    public void testAddFacture() {
+    private void testAddFacture() {
 
         Mockito.when(produitRepository.save(p1)).thenReturn(p1);
         Produit produit1 = produitService.addProduit(p1);
@@ -72,14 +72,14 @@ public class ProduitSericeTestMock {
         System.out.println("3");
     }
     @Test
-    public void testdeleteProduit(){
+    private void testdeleteProduit(){
         produitService.deleteProduit(66L);
         Mockito.verify(produitRepository, times(1)).deleteById(66L);
         System.out.println("4");
     }
     ///sss
     @Test
-    public void testupdateProduit(){
+    private void testupdateProduit(){
         Mockito.when(produitRepository.save(p1)).thenReturn(p1);
         Produit produit1 = produitService.updateProduit(p1);
         Mockito.verify(produitRepository, times(1)).save(Mockito.any(Produit.class));
@@ -87,7 +87,7 @@ public class ProduitSericeTestMock {
     }
 
     @Test
-    public void testassignProduitToStock(){
+    private void testassignProduitToStock(){
 
         Stock stock = new Stock();
         stock.setIdStock(1L);
