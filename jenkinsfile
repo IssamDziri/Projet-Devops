@@ -13,26 +13,11 @@ pipeline {
         sh "mvn clean"
       }
     }
-
-	stage("Mvn build") {
-      
-      steps {
-        sh "mvn clean package"
-      }
-    }
-
     stage("Mvn compile") {
       
       steps {
         echo 'compiling the application ...'
         sh "mvn compiler:compile"
-      }
-    }
-
-	stage("Mvn build") {
-      
-      steps {
-        sh "mvn test"
       }
     }
 
