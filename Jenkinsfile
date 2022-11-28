@@ -94,7 +94,7 @@ pipeline {
        
         
 		
-	}	    
+		    
     
     post {
                 success {
@@ -109,4 +109,6 @@ failure {
                 }
           
                 
+}
+	}
 }
