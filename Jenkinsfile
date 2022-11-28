@@ -31,6 +31,11 @@ pipeline {
                sh 'mvn compile'
             
            }
+		stage('MVN JUNIT') {
+            steps {
+                echo ''
+                   }
+                        }
         }
 	stage ('SONAR'){
             steps {
