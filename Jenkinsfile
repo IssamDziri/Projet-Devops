@@ -36,7 +36,7 @@ pipeline {
                 echo ''
                    }
                         }
-        }
+        
 	stage ('SONAR'){
             steps {
         
