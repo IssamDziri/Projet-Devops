@@ -23,18 +23,16 @@ pipeline {
                sh 'mvn clean'
             }
         }
+	    
+    
+                     }
         stage('MVN COMPILE') {
             steps {
                sh 'mvn compile'
             
            }
         }
-         stage('build'){
-            steps{
-                sh 'mvn install package'
-            }
-         }
-        stage ('SONAR'){
+	stage ('SONAR'){
             steps {
         
                   sh "mvn sonar:sonar \
@@ -43,8 +41,12 @@ pipeline {
   -Dsonar.login=27c7596cef5c4797dd38b8930699fac8aca59e9b"
 
                  }
-    
-                     }
+         stage('BUILD'){
+            steps{
+                sh 'mvn install package'
+            }
+         }
+        
                      
         stage('NEXUS') {
      
@@ -54,35 +56,41 @@ pipeline {
                        }
     
     
-       stage('Docker Build') {
+       stage('DOCKER BUILD') {
 
 			steps {
 				sh 'docker build -t 99266565/achat .'
 			}
 		}
-			stage('Docker Login') {
+			stage('DOCKER LOGIN') {
 
 			steps { 
 			    sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR -p $DOCKERHUB_CREDENTIALS_PSW'
 			}
 		} 
-		
-		      stage('Docker Compose'){
-            steps{
-                script{
-                    sh 'docker-compose up -d'
-                }
-            }
-       
-        }
-			stage('Dcker Push') {
+	    
+	    	stage('DOCKER PUSH') {
 
 			steps {
 				sh 'docker push 99266565/achat'
 			}
 		}
+		
 	    
-    }
+		 stage('DOCKER-COMPOSE'){
+          
+			 	steps{
+             
+					script{
+                				    sh 'docker-compose up -d'
+                		   	      }
+         			      }
+		 }
+       
+        
+		
+	    
+    
     post {
                 success {
                      mail to: "amine.m'sallem@esprit.tn",
