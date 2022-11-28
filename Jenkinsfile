@@ -94,22 +94,21 @@ pipeline {
        
         
 		
-		    
+	}		    
     
     post {
                 success {
                      mail to: "amine.m'sallem@esprit.tn",
                      subject: "success",
                      body: "success on job ${env.JOB_NAME}, Build Number: ${env.BUILD_NUMBER}, Build URL: ${env.BUILD_URL}"
-                }
-failure {
+               		 }
+		failure {
                     mail to: "amine.m'sallem@esprit.tn",
                      subject: "Failure",
                      body: "Failure on job ${env.JOB_NAME}, Build Number: ${env.BUILD_NUMBER}, Build URL: ${env.BUILD_URL} "     
-                }
+                	}
           
-                
+          }
 }
-	}
-	}
+	
 
